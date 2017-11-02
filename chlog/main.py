@@ -2,8 +2,8 @@ import argparse
 import re
 import datetime
 
-from logentry import LogEntry
-from version import Version
+from .logentry import LogEntry
+from .version import Version
 
 
 def parse_args():
@@ -106,7 +106,7 @@ def update_file(input_file,
                 next_version,
                 output_file=None):
     if not output_file:
-        output_file = input_file + '_'
+        output_file = input_file
 
     with open(input_file) as fp:
         lines = fp.readlines()
@@ -131,7 +131,7 @@ def update_file(input_file,
 def main():
     args = parse_args()
     filename = args.file
-    outfile = filename + '_'
+    outfile = None
 
     # Get latest version number from file / cli
     if not args.version or not Version.is_valid_version(args.version):
