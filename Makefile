@@ -10,18 +10,15 @@ build: test-all
 	python setup.py sdist bdist_wheel
 
 upload: build test-all
-	twine upload -r pypi dist/*
+	twine upload -r nexus dist/*
 	make clean
 	
-register:
-	python setup.py register
-
 clean:
 	rm -f MANIFEST
 	rm -rf build dist *.egg-info
 	
 bootstrap: venv
-	venv/bin/pip install -e .
+	venv/bin/python setup.py develop
 	make clean
 
 venv: 
